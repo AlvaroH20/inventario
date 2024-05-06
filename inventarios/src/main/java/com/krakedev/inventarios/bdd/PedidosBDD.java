@@ -91,8 +91,7 @@ public class PedidosBDD {
 
 			ArrayList<DetallePedido> detallesPedido = pedido.getDetalle();
 			DetallePedido det;
-			psH = con.prepareStatement(
-					"INSERT INTO historial_stock (fecha, referencia_pedidos, producto, cantidad) VALUES (?, ?, ?, ?)");
+			psH = con.prepareStatement(" insert into historial_stock (fecha, referencia_pedidos, producto, cantidad) values (?, ?, ?, ?)");
 			for (int i = 0; i < detallesPedido.size(); i++) {
 				det = detallesPedido.get(i);
 				psDet = con.prepareStatement(
