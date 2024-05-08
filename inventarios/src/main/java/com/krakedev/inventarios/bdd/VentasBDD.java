@@ -65,14 +65,13 @@ public class VentasBDD {
 				psDV.setBigDecimal(5, resulSubTotal);
 
 				if (detalleV.getProducto().isTieneIva()) {
-					BigDecimal iva = new BigDecimal(1.12);
+					BigDecimal iva = new BigDecimal(0.12);
 					BigDecimal rSubtotalIva = resulSubTotal.multiply(iva);
-					psDV.setBigDecimal(6, rSubtotalIva);
-					TotalIVA = TotalIVA.add(rSubtotalIva);
+					BigDecimal ConIva=rSubtotalIva.add(resulSubTotal);
+					psDV.setBigDecimal(6, ConIva);
 				} else {
+					TotalNoIva = TotalNoIva.add(resulSubTotal);
 					psDV.setBigDecimal(6, resulSubTotal);
-					TotalNoIva = TotalIVA.add(resulSubTotal);
-					;
 				}
 				
 				psDV.executeUpdate();

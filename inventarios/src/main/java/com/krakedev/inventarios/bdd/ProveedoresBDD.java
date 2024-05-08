@@ -77,5 +77,37 @@ public class ProveedoresBDD {
 	        }
 	 }
 	 
-	    
+	 public Proveedor buscarIdentificadorP(String cadena) throws KrakeDevException{
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs= null;
+			Proveedor proveedor = null;
+			try {
+				con = ConexionBDD.obtenerConexion();
+				ps = con.prepareStatement(" select prov.identificador, prov.tipo_documento, td.descripcion, prov.nombre, prov.telefono, prov.correo, prov.direccion "
+						+ " from proveedor prov, tipo_de_documento td "
+						+ " where prov.tipo_documento = td.codigo_doc and identificador=? ");
+				ps.setString(1, cadena);
+				rs = ps.executeQuery();
+				if (rs.next()) {
+					String identificador = rs.getString("identificador");
+					String codigoTipoDocumento = rs.getString("tipo_documento");
+					String descripcionTd = rs.getString("descripcion");
+					String nombre = rs.getString("nombre");
+					String telefono = rs.getString("telefono");
+					String correo = rs.getString("correo");
+					String direccion = rs.getString("direccion");
+					TipoDocumento tp= new TipoDocumento(codigoTipoDocumento,descripcionTd); 
+					proveedor = new Proveedor(identificador, tp, nombre, telefono, correo, direccion);
+				}
+				
+			} catch (KrakeDevException e) {
+				e.printStackTrace();
+				throw e;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new KrakeDevException("Error al consultar: "+e.getMessage());
+			}
+			return proveedor;
+		}
 }
