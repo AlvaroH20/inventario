@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="ejercicio.js"></script>
+    </head>
+    <body>
+        <input type="text" id="txtValor"/>
+        <input type="button" value="TEST1" onclick="ejecutarCadena((texto)=>{
+            console.log('Hola '+texto);
+        });"/>
+        <input type="button" value="TEST2" onclick="ejecutarCadena((mayusculas)=>{
+            let textoMayus=mayusculas.toUpperCase();
+            console.log(textoMayus);
+        });"/>
+        <input type="button" value="TEST3" onclick="ejecutarCadena((texto)=>{
+            let numeroC=texto.length;
+            alert(numeroC);
+        });"/>        
+    </body>
+</html>
